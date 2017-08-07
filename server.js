@@ -4,8 +4,10 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-var articleOne = {
+var articles = {
+    'article-one': {
     title: 'ARTICLE ONE | TEJASWINI SRIDHAR',
+    heading: 'ARTICLE ONE',
     date: 'august 7th 2017',
     content:  `<p>
         These lines are the from the book "THE PRIDE AND PREJUDICE".
@@ -18,7 +20,34 @@ var articleOne = {
         I declare after all there is no enjoyment like reading! How much sooner one tires of any thing than of a book! -- When I have a house of my own, I shall be miserable if I have not an excellent library.
         -Jane Austen, Pride and Prejudice
       </p>`
+    },
+    'article-two': {
+    title: 'ARTICLE TWO | TEJASWINI SRIDHAR',
+     heading: 'ARTICLE TWO',
+    date: 'august 7th 2017',
+    content:  `
+        <p>
+        I cannot fix on the hour, or the spot, or the look or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun.
+
+      </p>
+      <p>
+        I declare after all there is no enjoyment like reading! How much sooner one tires of any thing than of a book! -- When I have a house of my own, I shall be miserable if I have not an excellent library.
+        -Jane Austen, Pride and Prejudice
+      </p>`
+},
+    'article-three': {
+    title: 'ARTICLE THREE | TEJASWINI SRIDHAR',
+     heading: 'ARTICLE THREE',
+    date: 'august 7th 2017',
+    content:  `
+        <p>
+        I cannot fix on the hour, or the spot, or the look or the words, which laid the foundation. It is too long ago. I was in the middle before I knew that I had begun.
+
+      </p>`
+      
+}
 };
+
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
@@ -58,15 +87,13 @@ return htmlTemplate;
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/article-one', function (req, res) {
-     res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {
+    //articleName == article-one
+    //articles[articleName]== content object for article one
+    var articleName == req.params.articleName;
+     res.send(createTemplate(articles[articleName]));
 });
-app.get('/article-two', function (req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-app.get('/article-three', function (req, res) {
-    res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
+
 app.get('/ui/style.css', function (req, res) {
    res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
