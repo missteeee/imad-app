@@ -25,8 +25,8 @@ function createTemplate (data) {
     var heading=data.heading;
     var content=data.content;
 var htmlTemplate=
-`<html>
-  <head>
+   `<html>
+    <head>
     <title>
       ${title}
       </title>
@@ -59,7 +59,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 app.get('/article-one', function (req, res) {
-     res.send(createTemplate(articleOne));
+     res.send(createTemplate(article-one));
 });
 app.get('/article-two', function (req, res) {
     res.send("article two requested and will be served");
